@@ -1,4 +1,4 @@
-package GP3.edu.ucalgary.oop;
+package edu.ucalgary.oop;
 
 public class Inquirer {
     private String firstName;

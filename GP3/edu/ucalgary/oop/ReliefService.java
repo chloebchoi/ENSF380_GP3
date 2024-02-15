@@ -1,4 +1,4 @@
-package GP3.edu.ucalgary.oop;
+package edu.ucalgary.oop;
 
 public class ReliefService {
      private Inquirer inquirer;
