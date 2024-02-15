@@ -15,8 +15,13 @@ public class DisasterVictim{
     private int counter;
 
 
-    // put constructor here
-    // constructor must throw exception
+    // constructor
+    public DisasterVictim(String firstName, String ENTRY_DATE) {
+        this.firstName = firstName;
+        this. ENTRY_DATE = ENTRY_DATE;
+        // constructor must throw exception
+    }
+    
 
     // getters
     public String getFirstName() {
@@ -95,12 +100,23 @@ public class DisasterVictim{
         this.personalBelongings = temp;
     }
     public void addFamilyConnection(FamilyRelation familyConnection) {
-        // update this
+        int x = familyConnections.length;
+        FamilyRelation[] temp = Arrays.copyOf(familyConnections, x + 1);
+        temp[x] = familyConnection;
+        this.familyConnections = temp;
     }
     public void removeFamilyConnection(FamilyRelation familyConnection) {
-        // update this
+        int x = familyConnections.length;
+        FamilyRelation[] temp = Arrays.copyOf(familyConnections, x - 1);
+        for (int i = 0; i < (x-1); i++){
+            temp[i] = familyConnections[i];
+        }
+        this.familyConnections = temp;
     }
     public void addMedicalRecord(MedicalRecord medicalRecord) {
-        // update this
+        int x = medicalRecords.length;
+        MedicalRecord[] temp = Arrays.copyOf(medicalRecords, x + 1);
+        temp[x] = medicalRecord;
+        this.medicalRecords = temp;
     }
 }
