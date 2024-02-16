@@ -135,19 +135,21 @@ public class DisasterVictim {
     }
 
     public void removePersonalBelonging(Supply supply) {
-        int x = personalBelongings.length;
-        Supply[] temp = Arrays.copyOf(personalBelongings, x - 1);
-        for (int i = 0; i < x; i++) {
-            if (personalBelongings[i] != supply){
-                temp[i] = personalBelongings[i];
+            int x = personalBelongings.length;
+            Supply[] temp = Arrays.copyOf(personalBelongings, x - 1);
+            int j = 0;
+            for (int i = 0; i < x; i++) {
+                if (personalBelongings[i] != supply){
+                    temp[j] = personalBelongings[i];
+                    j++;
+                }
             }
-        }
-        this.personalBelongings = temp;
+            this.personalBelongings = temp;
     }
 
     public void addFamilyConnection(FamilyRelation familyConnection) {
         int x;
-        if (familyConnection == null){
+        if (familyConnections == null){
             x = 0;
             FamilyRelation[] temp = new FamilyRelation[1];
             temp[x] = familyConnection;
@@ -166,9 +168,11 @@ public class DisasterVictim {
         } else {
             int x = familyConnections.length;
             FamilyRelation[] temp = Arrays.copyOf(familyConnections, x - 1);
+            int j = 0;
             for (int i = 0; i < x; i++) {
                 if (familyConnections[i] != familyConnection){
-                    temp[i] = familyConnections[i];
+                    temp[j] = familyConnections[i];
+                    j++;
                 }
             }
             this.familyConnections = temp;
