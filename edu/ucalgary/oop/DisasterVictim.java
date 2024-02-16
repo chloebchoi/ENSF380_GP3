@@ -50,7 +50,6 @@ public class DisasterVictim {
     public String getComments() {
         return comments;
     }
-    public MedicalRecord[] getMedicalRecords() {
 
     public MedicalRecord[] getMedicalRecords() {
         return medicalRecords;
