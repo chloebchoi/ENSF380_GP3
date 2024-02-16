@@ -1,7 +1,7 @@
 package edu.ucalgary.oop;
 
 import java.util.Arrays;
-import java.util.regex.*;;
+import java.util.regex.*;
 
 public class DisasterVictim {
     private String firstName;
@@ -15,7 +15,7 @@ public class DisasterVictim {
     private String ENTRY_DATE;
     private Supply[] personalBelongings;
     private int counter;
-    private static final String regex = "(19|20)\\d{2}[-](0[1-9]|1[1,2])[-]/[1-31]/";
+    private static final String regex = "(19|20)\\d{2}[-](0[1-9]|1[1,2])[-](0[1-9]|[12][0-9]|3[01])";
     private static final Pattern correctDateFormat = Pattern.compile(regex);
 
     // constructor
