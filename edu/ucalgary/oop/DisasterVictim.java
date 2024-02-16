@@ -1,6 +1,7 @@
 package edu.ucalgary.oop;
 
 import java.util.Arrays;
+import java.util.regex.*;;
 
 public class DisasterVictim {
     private String firstName;
@@ -14,12 +15,23 @@ public class DisasterVictim {
     private String ENTRY_DATE;
     private Supply[] personalBelongings;
     private int counter;
+    private static final String regex = "(19|20)\\d{2}[-](0[1-9]|1[1,2])[-]/[1-31]/";
+    private static final Pattern correctDateFormat = Pattern.compile(regex);
 
     // constructor
     public DisasterVictim(String firstName, String ENTRY_DATE) {
-        this.firstName = firstName;
-        this.ENTRY_DATE = ENTRY_DATE;
-        // constructor must throw exception
+        Matcher match = correctDateFormat.matcher(ENTRY_DATE);
+        boolean isMatch = match.find();
+        if (firstName == null) {
+            throw new IllegalArgumentException("Cannot have null firstName value.");
+        } else if (ENTRY_DATE == null) {
+            throw new IllegalArgumentException("Cannot have null ENTRY_DATE value.");
+        } else if (isMatch == false) {
+            throw new IllegalArgumentException("Invalid ENTRY_DATE: " + ENTRY_DATE);
+        } else {
+            this.firstName = firstName;
+            this.ENTRY_DATE = ENTRY_DATE;
+        }
     }
 
     // getters
@@ -73,8 +85,14 @@ public class DisasterVictim {
     }
 
     public void setDateOfBirth(String dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-        // must throw exception here
+        Matcher match = correctDateFormat.matcher(ENTRY_DATE);
+        boolean isMatch = match.find();
+
+        if (isMatch == false) {
+            throw new IllegalArgumentException("Invalid dateOfBirth: " + dateOfBirth);
+        } else {
+            this.dateOfBirth = dateOfBirth;
+        }
     }
 
     public void setGender(String gender) {
