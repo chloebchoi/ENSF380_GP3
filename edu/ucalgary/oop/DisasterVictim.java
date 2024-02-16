@@ -135,6 +135,9 @@ public class DisasterVictim {
     }
 
     public void removePersonalBelonging(Supply supply) {
+        if (personalBelongings == null) {
+            return;
+        }
             int x = personalBelongings.length;
             Supply[] temp = Arrays.copyOf(personalBelongings, x - 1);
             int j = 0;
@@ -163,6 +166,9 @@ public class DisasterVictim {
     }
 
     public void removeFamilyConnection(FamilyRelation familyConnection) {
+        if (familyConnections == null) {
+            return;
+        }
         if (familyConnections.length == 1) {
             familyConnections = null;
         } else {
