@@ -14,7 +14,7 @@ public class DisasterVictim {
     private FamilyRelation[] familyConnections;
     private String ENTRY_DATE;
     private Supply[] personalBelongings;
-    private int counter = 0;
+    private static int counter = 0;
     private static final String regex = "(19|20)\\d{2}[-](0[1-9]|1[1,2])[-](0[1-9]|[12][0-9]|3[01])";
     private static final Pattern correctDateFormat = Pattern.compile(regex);
 
@@ -87,7 +87,7 @@ public class DisasterVictim {
     }
 
     public void setDateOfBirth(String dateOfBirth) throws IllegalArgumentException {
-        Matcher match = correctDateFormat.matcher(ENTRY_DATE);
+        Matcher match = correctDateFormat.matcher(dateOfBirth);
         boolean isMatch = match.find();
 
         if (isMatch == false) {
@@ -120,41 +120,74 @@ public class DisasterVictim {
 
     // other methods
     public void addPersonalBelonging(Supply supply) {
-        int x = personalBelongings.length;
-        Supply[] temp = Arrays.copyOf(personalBelongings, x + 1);
-        temp[x] = supply;
-        this.personalBelongings = temp;
+        int x;
+        if (personalBelongings == null){
+            x = 0;
+            Supply[] temp = new Supply[1];
+            temp[0] = supply;
+            this.personalBelongings = temp;
+        } else {
+            x = personalBelongings.length;
+            Supply[] temp = Arrays.copyOf(personalBelongings, x + 1);
+            temp[x] = supply;
+            this.personalBelongings = temp;
+        }
     }
 
     public void removePersonalBelonging(Supply supply) {
         int x = personalBelongings.length;
         Supply[] temp = Arrays.copyOf(personalBelongings, x - 1);
-        for (int i = 0; i < (x - 1); i++) {
-            temp[i] = personalBelongings[i];
+        for (int i = 0; i < x; i++) {
+            if (personalBelongings[i] != supply){
+                temp[i] = personalBelongings[i];
+            }
         }
         this.personalBelongings = temp;
     }
 
     public void addFamilyConnection(FamilyRelation familyConnection) {
-        int x = familyConnections.length;
-        FamilyRelation[] temp = Arrays.copyOf(familyConnections, x + 1);
-        temp[x] = familyConnection;
-        this.familyConnections = temp;
+        int x;
+        if (familyConnection == null){
+            x = 0;
+            FamilyRelation[] temp = new FamilyRelation[1];
+            temp[x] = familyConnection;
+            this.familyConnections = temp;
+        } else {
+            x = familyConnections.length;
+            FamilyRelation[] temp = Arrays.copyOf(familyConnections, x + 1);
+            temp[x] = familyConnection;
+            this.familyConnections = temp;
+        }
     }
 
     public void removeFamilyConnection(FamilyRelation familyConnection) {
-        int x = familyConnections.length;
-        FamilyRelation[] temp = Arrays.copyOf(familyConnections, x - 1);
-        for (int i = 0; i < (x - 1); i++) {
-            temp[i] = familyConnections[i];
+        if (familyConnections.length == 1) {
+            familyConnections = null;
+        } else {
+            int x = familyConnections.length;
+            FamilyRelation[] temp = Arrays.copyOf(familyConnections, x - 1);
+            for (int i = 0; i < x; i++) {
+                if (familyConnections[i] != familyConnection){
+                    temp[i] = familyConnections[i];
+                }
+            }
+            this.familyConnections = temp;
         }
-        this.familyConnections = temp;
+        
     }
 
     public void addMedicalRecord(MedicalRecord medicalRecord) {
-        int x = medicalRecords.length;
-        MedicalRecord[] temp = Arrays.copyOf(medicalRecords, x + 1);
-        temp[x] = medicalRecord;
-        this.medicalRecords = temp;
+        int x;
+        if (medicalRecords == null){
+            x = 0;
+            MedicalRecord[] temp = new MedicalRecord[1];
+            temp[0] = medicalRecord;
+            this.medicalRecords = temp;
+        } else {
+            x = medicalRecords.length;
+            MedicalRecord[] temp = Arrays.copyOf(medicalRecords, x + 1);
+            temp[x] = medicalRecord;
+            this.medicalRecords = temp;
+        }
     }
 }
