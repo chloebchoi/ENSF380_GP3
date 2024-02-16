@@ -51,7 +51,7 @@ public class DisasterVictim{
     public String getComments() {
         return comments;
     }
-    public MedicalRecords[] getMedicalRecords() {
+    public MedicalRecord[] getMedicalRecords() {
         return medicalRecords;
     }
     public String getEntryDate() {
