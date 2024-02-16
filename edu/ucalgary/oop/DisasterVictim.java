@@ -9,17 +9,17 @@ public class DisasterVictim {
     private String dateOfBirth;
     private String gender;
     private String comments;
-    private int ASSIGNED_SOCIAL_ID;
+    private final int ASSIGNED_SOCIAL_ID;
     private MedicalRecord[] medicalRecords;
     private FamilyRelation[] familyConnections;
-    private String ENTRY_DATE;
+    private final String ENTRY_DATE;
     private Supply[] personalBelongings;
-    private int counter;
+    private static int counter = 1000;
     private static final String regex = "(19|20)\\d{2}[-](0[1-9]|1[1,2])[-](0[1-9]|[12][0-9]|3[01])";
     private static final Pattern correctDateFormat = Pattern.compile(regex);
 
     // constructor
-    public DisasterVictim(String firstName, String ENTRY_DATE) {
+    public DisasterVictim(String firstName, String ENTRY_DATE) throws IllegalArgumentException {
         Matcher match = correctDateFormat.matcher(ENTRY_DATE);
         boolean isMatch = match.find();
         if (firstName == null) {
@@ -31,6 +31,9 @@ public class DisasterVictim {
         } else {
             this.firstName = firstName;
             this.ENTRY_DATE = ENTRY_DATE;
+
+            ASSIGNED_SOCIAL_ID = counter;
+            counter += 1;
         }
     }
 
@@ -84,7 +87,7 @@ public class DisasterVictim {
         this.lastName = lastName;
     }
 
-    public void setDateOfBirth(String dateOfBirth) {
+    public void setDateOfBirth(String dateOfBirth) throws IllegalArgumentException {
         Matcher match = correctDateFormat.matcher(ENTRY_DATE);
         boolean isMatch = match.find();
 
@@ -125,9 +128,14 @@ public class DisasterVictim {
 
     public void removePersonalBelonging(Supply supply) {
         int x = personalBelongings.length;
-        Supply[] temp = Arrays.copyOf(personalBelongings, x - 1);
-        for (int i = 0; i < (x - 1); i++) {
-            temp[i] = personalBelongings[i];
+        Supply[] temp = new Supply[x - 1];
+        int j = 0;
+        for (int i = 0; i < x; i++) {
+            if (personalBelongings[i] == supply) {
+                continue;
+            }
+            temp[j] = personalBelongings[i];
+            j++;
         }
         this.personalBelongings = temp;
     }
