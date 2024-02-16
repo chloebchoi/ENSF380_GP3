@@ -9,17 +9,17 @@ public class DisasterVictim {
     private String dateOfBirth;
     private String gender;
     private String comments;
-    private int ASSIGNED_SOCIAL_ID;
+    private final int ASSIGNED_SOCIAL_ID;
     private MedicalRecord[] medicalRecords;
     private FamilyRelation[] familyConnections;
-    private String ENTRY_DATE;
+    private final String ENTRY_DATE;
     private Supply[] personalBelongings;
     private static int counter = 0;
     private static final String regex = "(19|20)\\d{2}[-](0[1-9]|1[1,2])[-](0[1-9]|[12][0-9]|3[01])";
     private static final Pattern correctDateFormat = Pattern.compile(regex);
 
     // constructor
-    public DisasterVictim(String firstName, String ENTRY_DATE) throws IllegalArgumentException{
+    public DisasterVictim(String firstName, String ENTRY_DATE) throws IllegalArgumentException {
         Matcher match = correctDateFormat.matcher(ENTRY_DATE);
         boolean isMatch = match.find();
         if (firstName == null) {
@@ -117,11 +117,10 @@ public class DisasterVictim {
         this.familyConnections = relation;
     }
 
-
     // other methods
     public void addPersonalBelonging(Supply supply) {
         int x;
-        if (personalBelongings == null){
+        if (personalBelongings == null) {
             x = 0;
             Supply[] temp = new Supply[1];
             temp[0] = supply;
@@ -152,7 +151,7 @@ public class DisasterVictim {
 
     public void addFamilyConnection(FamilyRelation familyConnection) {
         int x;
-        if (familyConnections == null){
+        if (familyConnections == null) {
             x = 0;
             FamilyRelation[] temp = new FamilyRelation[1];
             temp[x] = familyConnection;
@@ -176,19 +175,19 @@ public class DisasterVictim {
             FamilyRelation[] temp = Arrays.copyOf(familyConnections, x - 1);
             int j = 0;
             for (int i = 0; i < x; i++) {
-                if (familyConnections[i] != familyConnection){
+                if (familyConnections[i] != familyConnection) {
                     temp[j] = familyConnections[i];
                     j++;
                 }
             }
             this.familyConnections = temp;
         }
-        
+
     }
 
     public void addMedicalRecord(MedicalRecord medicalRecord) {
         int x;
-        if (medicalRecords == null){
+        if (medicalRecords == null) {
             x = 0;
             MedicalRecord[] temp = new MedicalRecord[1];
             temp[0] = medicalRecord;
